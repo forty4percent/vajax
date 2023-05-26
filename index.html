@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Registration Form</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+  <h1>User Registration Form</h1>
+  <form id="registrationForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" required>
+    <br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
+    <br>
+    <input type="submit" value="Register">
+  </form>
+
+  <script>
+    $(document).ready(function() {
+      $('#registrationForm').submit(function(event) {
+        event.preventDefault();
+        var name = $('#name').val();
+        var email = $('#email').val();
+        var data = { name: name, email: email };
+
+        $.ajax({
+          type: 'POST',
+          url: '/register',
+          data: data,
+          success: function(response) {
+            window.location.href = '/list';
+          },
+          error: function(error) {
+            console.log(error);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
